@@ -53,9 +53,7 @@ SHELLCHECK := $(BIN)/shellcheck
 BATS       := $(BIN)/bats
 
 HTMLHINT  := $(NODEMODBIN)/htmlhint
-CSSLINT   := $(NODEMODBIN)/csslint
 STYLELINT := $(NODEMODBIN)/stylelint
-JSCS      := $(NODEMODBIN)/jscs
 ESLINT    := $(NODEMODBIN)/eslint
 JSONLINT  := $(NODEMODBIN)/jsonlint
 JSYAML    := $(NODEMODBIN)/js-yaml
@@ -66,7 +64,6 @@ MOCHA     := $(NODEMODBIN)/mocha
 NYC       := $(NODEMODBIN)/nyc
 COVERALLS := $(NODEMODBIN)/coveralls
 CODECOV   := $(NODEMODBIN)/codecov
-
 
 
 # target: help               - Displays help.
@@ -123,9 +120,9 @@ check: check-tools-js #check-tools-bash check-tools-php
 
 # target: test               - Run all tests.
 .PHONY: test
-test: htmlhint stylelint jscs eslint jsunittest #csslint
+test: htmlhint stylelint eslint jsunittest
 	@$(call HELPTEXT,$@)
-	[ ! -f composer.json ] || composer validate
+	[ ! -f composer.json ] || composer validate
 
 
 
@@ -155,7 +152,7 @@ install: prepare install-tools-js #install-tools-php install-tools-bash
 update:
 	@$(call HELPTEXT,$@)
 	[ ! -d .git ] || git pull
-	[ ! -f composer.json ] || composer update
+	[ ! -f composer.json ] || composer update
 	[ ! -f package.json ] || npm update
 
 
@@ -180,7 +177,7 @@ tag-prepare:
 .PHONY: setup-tools-js
 setup-tools-js:
 	@$(call HELPTEXT,$@)
-	npm install --save-dev htmlhint csslint stylelint jscs eslint eslint-plugin-react jsonlint js-yaml html-minifier clean-css-cli uglify-js mocha nyc coveralls codecov
+	npm install --save-dev htmlhint stylelint eslint eslint-plugin-pug eslint-plugin-react jsonlint js-yaml html-minifier clean-css-cli uglify-es mocha nyc coveralls codecov
 
 
 
@@ -199,9 +196,7 @@ check-tools-js:
 	@$(call CHECK_VERSION, node)
 	@$(call CHECK_VERSION, npm)
 	@$(call CHECK_VERSION, $(HTMLHINT))
-	@$(call CHECK_VERSION, $(CSSLINT))
 	@$(call CHECK_VERSION, $(STYLELINT))
-	@$(call CHECK_VERSION, $(JSCS))
 	@$(call CHECK_VERSION, $(ESLINT))
 	@$(call CHECK_VERSION, $(JSONLINT))
 	@$(call CHECK_VERSION, $(JSYAML))
@@ -223,14 +218,6 @@ htmlhint:
 
 
 
-# target: csslint            - CSSlint.
-.PHONY: csslint
-csslint:
-	@$(call HELPTEXT,$@)
-	[ ! -f .csslintrc ] || $(CSSLINT) .
-
-
-
 # target: stylelint          - Stylelint (alternative csslint).
 .PHONY: stylelint
 stylelint:
@@ -244,14 +231,6 @@ stylelint:
 stylelint-fix:
 	@$(call HELPTEXT,$@)
 	[ ! -f .stylelintrc.json ] || $(STYLELINT) **/*.css --fix
-
-
-
-# target: jscs               - JavaScript code style.
-.PHONY: jscs
-jscs:
-	@$(call HELPTEXT,$@)
-	[ ! -f .jscsrc ] || $(JSCS) .
 
 
 
@@ -276,9 +255,9 @@ eslint-fix:
 jsunittest:
 	@$(call HELPTEXT,$@)
 ifneq ($(wildcard .nycrc),)
-	$(NYC) $(MOCHA) --reporter dot 'test/**/*.js'
+	[ ! -d test ] || $(NYC) $(MOCHA) --reporter dot 'test/**/*.js'
 else
-	$(MOCHA) --reporter dot 'test/**/*.js'
+	[ ! -d test ] || $(MOCHA) --reporter dot 'test/**/*.js'
 endif 
 
 

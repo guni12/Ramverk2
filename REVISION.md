@@ -5,4 +5,4 @@ Revision history
 v1.0.0* (2017-11-03)
 ---------------------------------
 
-* First
+* First version

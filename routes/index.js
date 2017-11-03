@@ -44,6 +44,7 @@ router.get('/kmom*', function(req, res) {
         app.set('kmom', marked(data));
         console.log(marked(data));
         //do operation on data that generates say resultArray;
+        return undefined;
     });
 
     console.log("items", app.get("kmom"));

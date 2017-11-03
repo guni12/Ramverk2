@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
     });
 });
 
-/* GET home page. */
+/* GET about page. */
 router.get('/about', function(req, res) {
     res.render('about', {
         title: 'Om-sidan'
@@ -26,7 +26,7 @@ router.get('/report', function(req, res) {
     });
 });
 
-/* GET users listing. */
+/* GET kmom with .md */
 router.get('/kmom*', function(req, res) {
     var base = app.get("views");
     var text = req.app.locals.basedir + "/..";
@@ -34,20 +34,13 @@ router.get('/kmom*', function(req, res) {
 
     var file = base + "/../content" + path + ".md";
 
-    console.log(app.locals.settings);
-    //res.sendFile('/../content' + path);
-
     fs.readFile(file, "utf8", function(err, data) {
         if (err) {
             throw err;
         }
         app.set('kmom', marked(data));
-        console.log(marked(data));
-        //do operation on data that generates say resultArray;
         return undefined;
     });
-
-    console.log("items", app.get("kmom"));
 
     res.render('kmom', {
         content: path,

@@ -4,7 +4,6 @@
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-//var fs = require('fs'); // this engine requires the fs module
 
 // Create the app objekt
 var express = require('express');
@@ -49,49 +48,6 @@ app.use(express.static(staticFiles));
 
 app.use('/', index);
 app.use('/users', users);
-
-/*
-app.engine('md', function (filePath, options, callback) { // define the template engine
-    fs.readFile(filePath, function (err, content) {
-        if (err) {
-            return callback(err);
-        }
-        // this is an extremely simple template engine
-        var rendered = content.toString().replace('#title#', '<title>' + options.title + '</title>')
-            .replace('#message#', '<h1>' + options.message + '</h1>');
-
-        return callback(null, rendered);
-    });
-});
-
-app.set('view engine', 'md'); // register the template engine*/
-/*
-// Add routes for 404 and error handling
-// Catch 404 and forward to error handler
-// Put this last
-app.use((req, res, next) => {
-    var err = new Error("Not Found");
-
-    err.status = 404;
-    next(err);
-});
-
-// Note the error handler takes four arguments
-app.use((err, req, res, next) => {
-    if (res.headersSent) {
-        return next(err);
-    }
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    err.status = err.status || 500;
-    res.status(err.status);
-    res.render("error", {
-        error: err
-    });
-});
-*/
 
 
 // Start up server

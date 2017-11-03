@@ -1,0 +1,13 @@
+doctype html
+html
+    include head.pug
+    body
+        div(class="container")
+            include header.pug
+            include navbar.pug
+            block content
+            block main
+                main(class="main") Mainblock
+            script
+                include ../public/javascripts/script.js
+            include footer.pug

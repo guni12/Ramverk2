@@ -1,0 +1,31 @@
+block navbar
+
+nav(class="navbar")
+    div(class="container-fluid")
+        div(class="navbar-header")
+            button(type="button", class="navbar-toggle", data-toggle="collapse", data-target="#myNavbar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+            a(class="navbar-brand", href="/") Brand
+        div(class="collapse navbar-collapse", id="myNavbar")
+            ul(class="nav navbar-nav")
+                li(class="home") <a href="/">Hem</a>
+                li(class="about") <a href="/about">Om</a>
+                li(class="dropdown")
+                    a(class="dropdown-toggle", data-toggle="dropdown", href="/report") Redovisning
+                        span(class="caret")
+                    ul(class="dropdown-menu")
+                        li(class ="kmom01")
+                            a(href="/kmom01") Kmom01
+                        li(class ="kmom02")
+                            a(href="/kmom02") Kmom02
+                        li(class ="kmom03")
+                            a(href="/kmom03") Kmom03
+                        li(class ="kmom04")
+                            a(href="/kmom04") Kmom04
+                        li(class ="kmom05")
+                            a(href="/kmom05") Kmom05
+                        li(class ="kmom06")
+                            a(href="/kmom06") Kmom06
+            ul(class="nav navbar-nav navbar-right")

@@ -1,0 +1,69 @@
+body {
+    background: #fbf8f3;
+    color: #838281;
+    text-align: center;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.container {
+    margin: 0 auto;
+    text-align: left;
+    width: 90%;
+}
+
+.header {
+    top: 0;
+    margin: 1% 1% 1% 0;
+    height: 20px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.header-right {
+    float: right;
+}
+
+.navbar-wrap {
+    margin: 0 auto;
+}
+
+.navbar-header a {
+    color: #ee7203;
+    color: white;
+}
+
+.navbar-brand {
+    background: url("../img/logo.png") no-repeat;
+    background-size: 100%;
+}
+
+.navbar-collapse a {
+    color: #d8776a;
+}
+
+.navbar-nav .active a {
+    color: #30b4cb;
+}
+
+.icon-bar {
+    background-color: #30b4cb;
+}
+
+.post-content {
+    left: 7%;
+    position: absolute;
+    top: 93%;
+}
+
+.post-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.img-thumbnail {
+    position: relative;
+}
+
+.last {
+    padding-top: 1%;
+}

@@ -1,0 +1,18 @@
+extend layout.pug
+
+block main
+    case content
+        when '/kmom01'
+            include:markdown-it(linkify langPrefix='highlight-') ../content/kmom01.md
+        when '/kmom02'
+            include:markdown-it(linkify langPrefix='highlight-') ../content/kmom02.md
+        when '/kmom03'
+            include:markdown-it(linkify langPrefix='highlight-') ../content/kmom03.md
+        when '/kmom04'
+            include:markdown-it(linkify langPrefix='highlight-') ../content/kmom04.md
+        when '/kmom05'
+            include:markdown-it(linkify langPrefix='highlight-') ../content/kmom05.md
+        when '/kmom06'
+            include:markdown-it(linkify langPrefix='highlight-') ../content/kmom06.md
+        default
+            include:markdown-it(linkify langPrefix='highlight-') ../content/kmom01.md

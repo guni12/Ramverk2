@@ -8,15 +8,9 @@ var users = require('./routes/users');
 // Create the app objekt
 var express = require('express');
 const path = require('path');
-var portenv = process.env.DBWEBB_PORT;
 var app = express();
 
 //var sess;
-
-console.log("portenv", portenv);
-
-var port = typeof portenv !== 'undefined' ? portenv : 1337;
-
 
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -49,10 +43,39 @@ app.use(express.static(staticFiles));
 app.use('/', index);
 app.use('/users', users);
 
+// This is middleware called for all routes.
+// Middleware takes three parameters.
+app.use((req, res, next) => {
+    console.log(req.method);
+    console.log(req.path);
+    next();
+});
 
-// Start up server
-console.log("Express is ready. Listens at port " + port);
-app.listen(port);
+// Add routes for 404 and error handling
+// Catch 404 and forward to error handler
+// Put this last
+app.use((req, res, next) => {
+    var err = new Error("Not Found");
+
+    err.status = 404;
+    next(err);
+});
+
+// Note the error handler takes four arguments
+app.use((err, req, res, next) => {
+    if (res.headersSent) {
+        return next(err);
+    }
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    err.status = err.status || 500;
+    res.status(err.status);
+    res.render("error", {
+        error: err
+    });
+});
 
 module.exports = app;
 
